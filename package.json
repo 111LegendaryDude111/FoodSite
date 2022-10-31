@@ -1,0 +1,28 @@
+{
+  "name": "foodsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/111LegendaryDude111/FoodSite.git"
+  },
+  "keywords": [
+    "foodSite",
+    "food",
+    "FoodSite",
+    "Foodsite"
+  ],
+  "author": "David",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/111LegendaryDude111/FoodSite/issues"
+  },
+  "homepage": "https://github.com/111LegendaryDude111/FoodSite#readme",
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
+}
