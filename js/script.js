@@ -326,89 +326,97 @@ window.addEventListener('DOMContentLoaded',()=>{
         // Получить элементы
         // Определить индекс
 
-        const counterSlider = document.querySelector('#current'),
-            btnSliderPrev = document.querySelector('.offer__slider-prev'),
-            btnSliderNext = document.querySelector('.offer__slider-next'),
-            sliderWrapper = document.querySelectorAll('.offer__slide');
+        // const counterSlider = document.querySelector('#current'),
+        //     btnSliderPrev = document.querySelector('.offer__slider-prev'),
+        //     btnSliderNext = document.querySelector('.offer__slider-next'),
+        //     sliderWrapper = document.querySelectorAll('.offer__slide');
 
-            function sliderShow(i = 0){
-                sliderWrapper[i].classList.add('show');
-                sliderWrapper[i].classList.remove('hide');
-                sliderWrapper[i].classList.add('tabheader__item_active');
-            }
+        //     function sliderShow(i = 0){
+        //         sliderWrapper[i].classList.add('show');
+        //         sliderWrapper[i].classList.remove('hide');
+        //         sliderWrapper[i].classList.add('tabheader__item_active');
+        //     }
 
-            function hideSlider(){
-                sliderWrapper.forEach(el => {
-                    el.classList.add('hide');
-                    el.classList.remove('show');
-                    el.classList.remove('tabheader__item_active');
+        //     function hideSlider(){
+        //         sliderWrapper.forEach(el => {
+        //             el.classList.add('hide');
+        //             el.classList.remove('show');
+        //             el.classList.remove('tabheader__item_active');
 
-                });
-            }
+        //         });
+        //     }
             
-            let i = 0;
-            hideSlider();
-            sliderShow(i);
-            counterSlider.innerHTML = `0${i + 1}`;
+        //     let i = 0;
+        //     hideSlider();
+        //     sliderShow(i);
+        //     counterSlider.innerHTML = `0${i + 1}`;
 
 
-            btnSliderNext.addEventListener('click', (e) => {
-                if (i === 3){
-                    i = 0;
-                }else{
-                    i++;
+        //     btnSliderNext.addEventListener('click', (e) => {
+        //         if (i === 3){
+        //             i = 0;
+        //         }else{
+        //             i++;
+        //         }
+        //             hideSlider();
+        //             sliderShow(i);
+        //             counterSlider.innerHTML = `0${i + 1}`;
+        //     });
+
+        //     btnSliderPrev.addEventListener('click', (e) => {
+        //         if (i === 0){
+        //             i = 3;
+        //         }else{
+        //             i--;
+        //         }
+        //             hideSlider();
+        //             sliderShow(i);
+        //             counterSlider.innerHTML = `0${i + 1}`;
+        //     });
+
+
+            //Slider v2.0
+
+            let slideIndex = 1;
+            const slides = document.querySelectorAll('.offer__slide'),
+                prev = document.querySelector('.offer__slider-prev'),
+                next = document.querySelector('.offer__slider-next'),
+                total = document.querySelector('#total'),
+                current = document.querySelector('#current');
+        
+            showSlides(slideIndex);
+        
+            if (slides.length < 10) {
+                total.textContent = `0${slides.length}`;
+            } else {
+                total.textContent = slides.length;
+            }
+        
+            function showSlides(n) {
+                if (n > slides.length) {
+                    slideIndex = 1;
                 }
-                    hideSlider();
-                    sliderShow(i);
-                    counterSlider.innerHTML = `0${i + 1}`;
-            });
-
-            btnSliderPrev.addEventListener('click', (e) => {
-                if (i === 0){
-                    i = 3;
-                }else{
-                    i--;
+                if (n < 1) {
+                    slideIndex = slides.length;
                 }
-                    hideSlider();
-                    sliderShow(i);
-                    counterSlider.innerHTML = `0${i + 1}`;
+                slides.forEach((item) => item.style.display = 'none');
+                slides[slideIndex - 1].style.display = 'block'; 
+                if (slides.length < 10) {
+                    current.textContent =  `0${slideIndex}`;
+                } else {
+                    current.textContent =  slideIndex;
+                }
+            }
+        
+            function plusSlides (n) {
+                showSlides(slideIndex += n);
+            }
+        
+            prev.addEventListener('click', function(){
+                plusSlides(-1);
             });
-
-
-
-
-            //Slider
-
-            // const slides = document.querySelectorAll('.offer__slide'),
-            //     prev = document.querySelector('.offer__slider-prev'),
-            //     next = document.querySelector('.offer__slider-next');
-            //     let slideIndex = 1;
-
-
-            //     function slhowSlides(n){
-            //         if (n > slides.length){
-            //             slideIndex = 1;
-            //         }
-
-            //         if (n < 1){
-            //             slideIndex = slides.length;
-            //         }
-
-            //         slides.forEach(item => item.style.display ='none');
-
-            //         slides[slideIndex - 1].style.display = 'block';
-
-            //     }
-
-            //     function plusSlides(n){
-            //         slhowSlides(slideIndex += n);
-
-            //         prev.addEventListener('click', () => {
-            //             plusSlides(-1);
-            //         });
-
-            //         next.addEventListener('click', () => {
-            //             plusSlides(1);
-            //         });
-            //     }
+        
+            next.addEventListener('click', function(){
+                plusSlides(1);
+            });
 });
